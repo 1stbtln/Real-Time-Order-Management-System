@@ -100,21 +100,21 @@
 
         function renderOrders(orders) {
             const statusMapping = {
-                'pending': 'prePrepOrders', // ID of the container for pending orders
-                'in the oven': 'inOvenOrders', // ID of the container for in the oven orders
-                'ready for pickup': 'readyForPickupOrders' // ID of the container for ready for pickup orders
+                'pending': 'prePrepOrders',
+                'in the oven': 'inOvenOrders', 
+                'ready for pickup': 'readyForPickupOrders' 
             };
 
             Object.keys(statusMapping).forEach(status => {
                 const containerId = statusMapping[status];
-                const container = document.getElementById(containerId); // Use getElementById to select the container
+                const container = document.getElementById(containerId); 
 
                 if (!container) {
                     console.error("No container found for status:", status);
                     return; // Skip this iteration if container not found
                 }
 
-                container.innerHTML = ''; // Now safe to clear the container
+                container.innerHTML = ''; 
 
                 orders.filter(order => order.status === status).forEach(order => {
                     const orderDiv = document.createElement('div');
@@ -128,11 +128,7 @@
                 });
             });
         }
-
-
-
-
-        function renderSingleOrderUpdate(data) {
+            function renderSingleOrderUpdate(data) {
             
         }
     });
