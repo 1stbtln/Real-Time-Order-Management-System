@@ -159,8 +159,6 @@ async function readOrders() {
     }
 }
 
-////////////////////////////////////////
-// Function to save orders to JSON
 async function saveOrders(orders) {
     try {
         await fs.promises.writeFile(path, JSON.stringify(orders, null, 4), 'utf8');
@@ -169,13 +167,11 @@ async function saveOrders(orders) {
     }
 }
 
-// Function to remove orders with 'ready for pickup' status older than 5 minutes
 async function cleanupOldOrders() {
     let orders = await readOrders();
     const currentTime = Date.now();
-    const fiveMinutes = 300000; // 5 minutes in milliseconds
+    const fiveMinutes = 300000; 
 
-    // Filter out orders that are 'ready for pickup' and older than 5 minutes
     orders = orders.filter(order => {
         if (order.status === 'ready for pickup' && order.readyTime) {
             return (currentTime - new Date(order.readyTime).getTime()) < fiveMinutes;
@@ -186,17 +182,15 @@ async function cleanupOldOrders() {
     await saveOrders(orders);
 }
 
-// Call cleanupOldOrders every minute
 setInterval(cleanupOldOrders, 60000);
 
-// Example of setting the readyTime when changing the status to 'ready for pickup'
 app.post("/update-order-status", async (req, res) => {
     const { orderId, status } = req.body;
     let orders = await readOrders();
     orders = orders.map(order => {
         if (order.id === orderId && status === 'ready for pickup') {
             order.status = 'ready for pickup';
-            order.readyTime = new Date().toISOString(); // Set the time when status is changed to 'ready for pickup'
+            order.readyTime = new Date().toISOString(); 
         }
         return order;
     });
@@ -204,7 +198,6 @@ app.post("/update-order-status", async (req, res) => {
     await saveOrders(orders);
     res.send({ message: 'Order updated' });
 });
-////////////////////////////////////////
 
 server.listen(3000, () => {
     console.log("Server running on port 3000");
