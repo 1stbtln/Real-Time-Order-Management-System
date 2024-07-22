@@ -1,31 +1,33 @@
-A real-time order management system using Node.js, Express, Socket.io, and EJS. This application integrates with Square's API for payment processing and a custom Kitchen Display System (KDS) webhook to update order statuses dynamically. It includes features for handling real-time updates, infinite scrolling for large order lists, and automated cleanup of old orders.
+# Order Management System
 
-Repository Files:
-index.js - Main server file.
-public/ - Static files such as CSS and JavaScript.
-views/ - EJS templates for rendering HTML.
-orderDetails.json - JSON file storing order details.
-README.md:
-markdown
-Copy code
-# Real-Time Order Management System
-
-This is a real-time order management system built with Node.js, Express, Socket.io, and EJS. It integrates with Square's API for payment processing and a custom Kitchen Display System (KDS) webhook to update order statuses dynamically.
+This repository contains a Node.js application that manages orders and integrates with Square and Twilio for handling payments and notifications. The system includes real-time updates, order processing, and an admin interface.
 
 ## Features
 
-- **Real-Time Updates**: Uses Socket.io for real-time updates to the front-end.
-- **Square Integration**: Integrates with Square's API to handle payment events.
-- **KDS Integration**: Receives and processes webhooks from a custom KDS.
-- **Order Management**: Automatically updates order statuses and cleans up old orders.
-- **Infinite Scrolling**: Implements infinite scrolling for "ready for pickup" orders when there are more than 7 orders.
+- **Real-time Order Updates**: Uses Socket.IO for real-time updates on order statuses.
+- **Webhook Handling**: Handles webhooks from Square and Fresh KDS for order updates and notifications.
+- **Order Storage**: Stores order details in JSON files and handles CRUD operations.
+- **SMS Notifications**: Sends SMS notifications to customers using Twilio when the order status changes.
+- **Admin Interface**: Provides an admin interface for viewing and managing orders.
+
+## Technologies Used
+
+- Node.js
+- Express
+- Socket.IO
+- Axios
+- Twilio
+- EJS (Embedded JavaScript Templates)
+- Moment.js
+- Bootstrap
+- HTML/CSS
 
 ## Installation
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/real-time-order-management-system.git
-    cd real-time-order-management-system
+    git clone https://github.com/yourusername/order-management-system.git
+    cd order-management-system
     ```
 
 2. **Install dependencies**:
@@ -34,81 +36,79 @@ This is a real-time order management system built with Node.js, Express, Socket.
     ```
 
 3. **Set up environment variables**:
-    Create a `.env` file in the root directory and add your Square API key:
+    Create a `.env` file in the root directory and add your environment variables:
     ```env
-    SQUARE_API_KEY=API_KEY
+    API_KEY=your_square_api_key
+    TWILIO_PHONE_NUMBER=your_twilio_phone_number
+    ACCOUNT_SID=your_twilio_account_sid
+    AUTH_TOKEN=your_twilio_auth_token
     ```
 
-4. **Run the server**:
+4. **Start the server**:
     ```bash
     npm start
     ```
 
-5. **Open your browser**:
-    Visit `http://localhost:3000` to view the application.
+    The server will start on `http://localhost:3000`.
 
 ## Usage
 
-- **Square Webhooks**: The server listens for Square webhook events at `/webhooks/square`.
-- **KDS Webhooks**: The server listens for KDS webhook events at `/webhooks/fhresh-kids`.
-- **Order Status Update**: To update the status of an order, send a POST request to `/update-order-status` with the order ID and new status.
+### Main Page
+
+- Access the main page at `http://localhost:3000` to view the current orders and their statuses.
+- Orders are displayed in three categories: Pending, In the Oven, and Ready for Pickup.
+
+### Admin Interface
+
+- Access the admin login page at `http://localhost:3000/adminLogin`.
+- After logging in, view and manage orders at `http://localhost:3000/admin`.
+
+### Webhooks
+
+- **Square Webhook**: Handles payment creation events from Square. Updates order details and notifies customers.
+- **Fresh KDS Webhook**: Handles KDS events to update order statuses and notify customers.
+
+### SMS Notifications
+
+- Sends SMS notifications to customers when their order status changes (e.g., "in the oven" or "ready for pickup").
 
 ## File Structure
 
-.
-├── public
-│ ├── css
-│ │ └── style.css
-│ └── js
-│ └── script.js
-├── views
-│ └── index.ejs
-├── orderDetails.json
-├── index.js
-├── .env
-├── package.json
-└── README.md
+- `server.js`: Main server file handling routes, webhooks, and order processing.
+- `views/`: Contains EJS templates for rendering HTML pages.
+- `public/`: Contains static files such as CSS and client-side JavaScript.
+- `orderDetails.json`: Stores order details.
+- `processedEvents.json`: Stores IDs of processed events to prevent duplicate processing.
 
-markdown
-Copy code
+## API Endpoints
 
-## Contributing
+- `GET /`: Main page displaying current orders.
+- `GET /adminLogin`: Admin login page.
+- `GET /admin`: Admin interface for managing orders.
+- `POST /webhooks/square`: Webhook endpoint for handling Square payment events.
+- `POST /webhooks/fresh-kds`: Webhook endpoint for handling Fresh KDS events.
+- `POST /delete-json`: Clears all orders.
+- `DELETE /delete-order/:id`: Deletes a specific order by ID.
+- `POST /update-order-status`: Updates the status of a specific order.
 
-Contributions are welcome! Please open an issue or submit a pull request with your changes.
+## Scripts
+
+- **Start Server**: `npm start` - Starts the server on port 3000.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgements
+## Acknowledgments
 
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [Socket.io](https://socket.io/)
-- [EJS](https://ejs.co/)
-- [Square API](https://developer.squareup.com/)
+- [Square API](https://developer.squareup.com/reference/square)
+- [Twilio API](https://www.twilio.com/docs/usage/api)
+- [Bootstrap](https://getbootstrap.com)
+- [Socket.IO](https://socket.io)
+- [Moment.js](https://momentjs.com)
 
-Instructions:
-Clone the Repository:
+Feel free to fork this repository and contribute! If you encounter any issues or have suggestions, please open an issue or submit a pull request.
 
-bash
-Copy code
-git clone https://github.com/your-username/real-time-order-management-system.git
-Navigate to the Project Directory:
+---
 
-bash
-Copy code
-cd real-time-order-management-system
-Install Dependencies:
-
-bash
-Copy code
-npm install
-Create an .env File: Add your Square API key to a new .env file in the root directory.
-
-Run the Server:
-
-bash
-Copy code
-npm start
-This setup will help you maintain a clean and well-documented repository for your real-time order management system.
+This README provides an overview of the Order Management System, including features, installation steps, usage instructions, and the file structure. The system integrates with Square for handling payments and Twilio for sending SMS notifications, and it uses Socket.IO for real-time updates.
