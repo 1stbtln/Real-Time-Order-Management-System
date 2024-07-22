@@ -10,7 +10,6 @@ const io = socketIo(server);
 const processedEvents = new Set();
 const path = "orderDetails.json";
 const processedEventsPath = "processedEvents.json";
-const accountSid = "ACc101e2c9badfdb243321800e58742bbb";
 const authToken = "[AuthToken]";
 const client = require("twilio")(accountSid, authToken);
 
