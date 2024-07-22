@@ -1,0 +1,30 @@
+.form-signin{
+  max-width: 360px;
+  padding: 1rem;
+}
+body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-color: black !important;
+}
+.fw-normal {
+  color: white !important;
+}
+svg {
+  color: white;
+  margin-bottom: 15px;
+}
+main {
+  border-radius: 35px;
+  background-color: #121212 !important;
+  padding: 35px !important;
+  margin: 5px !important;
+}
+.btn-primary {
+  background-color: #ff7300 !important;
+  border: none !important;
+}
+#smthngP {
+  color: white !important;
+}

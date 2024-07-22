@@ -1,0 +1,122 @@
+body {
+    background-color: rgb(0, 0, 0) !important;
+}
+
+.bodyDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.bodyDivChild {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px !important;
+    height: 90%;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.048);
+    border-radius: 35px;
+    padding: 55px;
+    margin: 25px;
+}
+
+.serverStatusDiv {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px 40px 0px 40px !important;
+}
+
+.serverControls {
+    border: 1px solid rgba(255, 166, 0, 0.466);;
+    border-radius: 30px;
+    padding: 15px;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+}
+
+.badge {
+    margin-left: 15px;
+    align-self: center;
+}
+
+#serverStatusP {
+    margin: 0px;
+    color: white;
+}
+
+p {
+    margin: 0px !important;
+}
+
+.serverControlsDivChild1 {
+    width: 100% !important;
+    display: flex;
+    justify-content: center !important;
+}
+
+.serverControlsDivChild2 {
+    width: 100% !important;
+    display: flex;
+    justify-content: center !important;
+}
+
+#serverControlTxt {
+    color: white !important;
+    padding-right: 15px !important;
+}
+
+.btn {
+    background-color: #ff7300 !important;
+}
+
+.dropdown-menu {
+    max-width: 400px !important;
+}
+
+.bumpOrdersGrid {
+    display: grid;
+    margin-top: 25px;
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 15px !important;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto; 
+    grid-gap: 18px; 
+}
+
+.bumpOrdersGrid > div {
+    border: 1px solid rgba(255, 166, 0, 0.466);
+    background-color: rgba(48, 0, 0, 0.253);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+h6 {
+    font-size: 1rem !important;
+}
+.ticketH6 {
+    color: #ff7300;
+}
+.ticketP {
+    color: white !important;
+}
+@media (min-width: 617px) and (max-width: 787px) {
+    .bumpOrdersGrid {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+@media (max-width: 616px) {
+    .bumpOrdersGrid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
